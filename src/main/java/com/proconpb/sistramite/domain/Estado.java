@@ -12,33 +12,28 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
-public class Setor implements Serializable {
+public class Estado implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private Integer codigo;
-	
+
 	@JsonIgnore
-	@OneToMany
-	(mappedBy="setorDestino")
-	private List<Tramite> tramites = new ArrayList<>();
+	@OneToMany(mappedBy="estado")
+	private List<Cidade> cidades = new ArrayList<>();
 	
-	public Setor() {
+	public Estado() {
 		
 	}
 
-	public Setor(Integer id, String nome, Integer codigo) {
+	public Estado(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.codigo = codigo;
 	}
-
 
 	public Integer getId() {
 		return id;
@@ -56,20 +51,12 @@ public class Setor implements Serializable {
 		this.nome = nome;
 	}
 
-	public Integer getCodigo() {
-		return codigo;
+	public List<Cidade> getCidades() {
+		return cidades;
 	}
 
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
-	}
-
-	public List<Tramite> getTramites() {
-		return tramites;
-	}
-
-	public void setTramites(List<Tramite> tramites) {
-		this.tramites = tramites;
+	public void setCidades(List<Cidade> cidades) {
+		this.cidades = cidades;
 	}
 
 	@Override
@@ -88,7 +75,7 @@ public class Setor implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Setor other = (Setor) obj;
+		Estado other = (Estado) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -96,4 +83,7 @@ public class Setor implements Serializable {
 			return false;
 		return true;
 	}
+	
+	
+	
 }

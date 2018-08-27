@@ -1,44 +1,37 @@
 package com.proconpb.sistramite.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Setor implements Serializable {
+public class Cidade implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private Integer codigo;
 	
-	@JsonIgnore
-	@OneToMany
-	(mappedBy="setorDestino")
-	private List<Tramite> tramites = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name="estado_id")
+	private Estado estado;
 	
-	public Setor() {
+	public Cidade() {
 		
 	}
 
-	public Setor(Integer id, String nome, Integer codigo) {
+	public Cidade(Integer id, String nome, Estado estado) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.codigo = codigo;
+		this.estado = estado;
 	}
-
 
 	public Integer getId() {
 		return id;
@@ -56,20 +49,12 @@ public class Setor implements Serializable {
 		this.nome = nome;
 	}
 
-	public Integer getCodigo() {
-		return codigo;
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
-	}
-
-	public List<Tramite> getTramites() {
-		return tramites;
-	}
-
-	public void setTramites(List<Tramite> tramites) {
-		this.tramites = tramites;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	@Override
@@ -88,7 +73,7 @@ public class Setor implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Setor other = (Setor) obj;
+		Cidade other = (Cidade) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -96,4 +81,6 @@ public class Setor implements Serializable {
 			return false;
 		return true;
 	}
+	
+	
 }

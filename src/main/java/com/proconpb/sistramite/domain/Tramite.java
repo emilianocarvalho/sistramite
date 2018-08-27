@@ -1,77 +1,52 @@
 package com.proconpb.sistramite.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Setor implements Serializable {
+public class Tramite implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
-	private Integer codigo;
+//	private Date data;
+	//private Auto auto;
+	//private Usuario usuario;
 	
-	@JsonIgnore
-	@OneToMany
-	(mappedBy="setorDestino")
-	private List<Tramite> tramites = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name="setor_id")
+	private Setor setorDestino;
 	
-	public Setor() {
+	public Tramite() {
 		
 	}
-
-	public Setor(Integer id, String nome, Integer codigo) {
+	public Tramite(Integer id, Setor setor) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.codigo = codigo;
+		this.setorDestino = setor;
+	//	this.data = data;
 	}
-
-
+	
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public String getNome() {
-		return nome;
+	public Setor getSetorDestino() {
+		return setorDestino;
 	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setSetorDestino(Setor setorDestino) {
+		this.setorDestino = setorDestino;
 	}
-
-	public Integer getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
-	}
-
-	public List<Tramite> getTramites() {
-		return tramites;
-	}
-
-	public void setTramites(List<Tramite> tramites) {
-		this.tramites = tramites;
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -79,7 +54,6 @@ public class Setor implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -88,7 +62,7 @@ public class Setor implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Setor other = (Setor) obj;
+		Tramite other = (Tramite) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -96,4 +70,5 @@ public class Setor implements Serializable {
 			return false;
 		return true;
 	}
+
 }

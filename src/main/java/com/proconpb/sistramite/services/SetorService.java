@@ -1,5 +1,6 @@
 package com.proconpb.sistramite.services;
 
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.proconpb.sistramite.domain.Setor;
 import com.proconpb.sistramite.repositories.SetorRepository;
+import com.proconpb.sistramite.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class SetorService {
@@ -16,6 +18,6 @@ public class SetorService {
 	
 	public Setor find(Integer id) {
 		Optional<Setor> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Setor não encontrado! Id: " + id + ", Tipo: " + Setor.class.getName()));
 	}
 }
