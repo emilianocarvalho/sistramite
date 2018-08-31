@@ -16,7 +16,7 @@ public class Tramite implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-//	private Date data;
+    //private Date data;
 	//private Auto auto;
 	//private Usuario usuario;
 	
@@ -25,8 +25,8 @@ public class Tramite implements Serializable {
 	private Setor setorDestino;
 	
 	public Tramite() {
-		
 	}
+	
 	public Tramite(Integer id, Setor setor) {
 		super();
 		this.id = id;
