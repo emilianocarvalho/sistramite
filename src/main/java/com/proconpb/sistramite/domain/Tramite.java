@@ -32,7 +32,9 @@ public class Tramite implements Serializable {
 	@MapsId
 	private Auto auto;
 	
-	//private Usuario usuario;
+	@ManyToOne
+	@JoinColumn(name="usuario_id")
+	private Pessoa usuario;
 	
 	@ManyToOne
 	@JoinColumn(name="setor_id")
@@ -41,12 +43,13 @@ public class Tramite implements Serializable {
 	public Tramite() {
 	}
 	
-	public Tramite(Integer id, Date dataMovimentacao, Setor setor, Auto auto) {
+	public Tramite(Integer id, Date dataMovimentacao, Setor setor, Auto auto, Pessoa usuario) {
 		super();
 		this.id = id;
 		this.dataMovimentacao = dataMovimentacao;
 		this.setorDestino = setor;
 		this.auto = auto;
+		this.usuario = usuario;
 	}
 	
 	public Integer getId() {
@@ -68,6 +71,22 @@ public class Tramite implements Serializable {
 		this.setorDestino = setorDestino;
 	}
 	
+	public Auto getAuto() {
+		return auto;
+	}
+
+	public void setAuto(Auto auto) {
+		this.auto = auto;
+	}
+
+	public Pessoa getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Pessoa usuario) {
+		this.usuario = usuario;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

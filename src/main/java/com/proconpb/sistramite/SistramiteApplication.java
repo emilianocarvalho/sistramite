@@ -72,18 +72,18 @@ public class SistramiteApplication implements CommandLineRunner{
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
-		Pessoa p1 = new Usuario(null, "Maria", "maria@procon.pb.gov.br", "Maria", "123456");
-		Pessoa p2 = new Usuario(null, "Darcio", "darcio@procon.pb.gov.br", "Darcio", "123");
+		Pessoa usu1 = new Usuario(null, "Maria", "maria@procon.pb.gov.br", "Maria", "123456");
+		Pessoa usu2 = new Usuario(null, "Darcio", "darcio@procon.pb.gov.br", "Darcio", "123");
 		
-		p1.getTelefones().addAll(Arrays.asList("32334286", "988532053"));
-		p2.getTelefones().addAll(Arrays.asList("32334286", "988567422"));
+		usu1.getTelefones().addAll(Arrays.asList("32334286", "988532053"));
+		usu2.getTelefones().addAll(Arrays.asList("32334286", "988567422"));
 		
-		Endereco e1 = new Endereco(null, "Rua Juscelino Kubitscheck", "692", "casa", "Geisel", "58075400", p1, c1);
-		Endereco e2 = new Endereco(null, "Rua Eng. Ávidos", "1209", "casa", "J. Planalto", "58088010", p2, c1);
+		Endereco e1 = new Endereco(null, "Rua Juscelino Kubitscheck", "692", "casa", "Geisel", "58075400", usu1, c1);
+		Endereco e2 = new Endereco(null, "Rua Eng. Ávidos", "1209", "casa", "J. Planalto", "58088010", usu2, c1);
 		
-		p1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		usu1.getEnderecos().addAll(Arrays.asList(e1, e2));
 		
-		pessoaRepository.saveAll(Arrays.asList(p1, p2));
+		pessoaRepository.saveAll(Arrays.asList(usu1, usu2));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 		
 		Pessoa emp1 = new PessoaJuridica(null, "Americanas", "sac@americanas.com", "12789456000125", "Lojas Americanas LTDA");
@@ -120,7 +120,7 @@ public class SistramiteApplication implements CommandLineRunner{
 		fsc1.getAutos().addAll(Arrays.asList(auto1));
 		fsc2.getAutos().addAll(Arrays.asList(auto2));
 		
-		Tramite t1 = new Tramite(null, sdf.parse("10/09/2018 08:10"), s1, auto1);
+		Tramite t1 = new Tramite(null, sdf.parse("10/09/2018 08:10"), s1, auto1, usu1);
 		
 		s1.getTramites().addAll(Arrays.asList(t1));
 

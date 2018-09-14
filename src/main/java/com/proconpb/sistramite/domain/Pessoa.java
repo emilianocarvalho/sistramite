@@ -42,7 +42,11 @@ public abstract class Pessoa implements Serializable{
 	
 	@JsonIgnore
 	@OneToMany
-	private List<Auto> autos = new ArrayList<>();;
+	private List<Auto> autos = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany
+	private List<Tramite> tramites = new ArrayList<>();
 
 	public Pessoa() {
 		
