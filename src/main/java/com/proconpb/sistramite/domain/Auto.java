@@ -3,6 +3,7 @@ package com.proconpb.sistramite.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,6 +35,9 @@ public class Auto implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="fiscal_id")
 	private Pessoa fiscal;
+	
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="auto")
+	private Tramite tramite;
 	
 	public Auto() {
 		

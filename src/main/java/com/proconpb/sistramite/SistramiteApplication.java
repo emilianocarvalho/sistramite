@@ -57,18 +57,7 @@ public class SistramiteApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy HH:mm");
-		
-		Setor s1 = new Setor(null, "TI", 1);
-		Setor s2 = new Setor(null, "RH", 2);
-		
-		Tramite t1 = new Tramite(null, s1);
-		Tramite t2 = new Tramite(null, s1);
-		
-		s1.getTramites().addAll(Arrays.asList(t1, t2));
-		
-		setorRepository.saveAll(Arrays.asList(s1, s2));
-		tramiteRepository.saveAll(Arrays.asList(t1, t2));
-		
+				
 		Estado est1 = new Estado(null, "Paraíba");
 		Estado est2 = new Estado(null, "Sergipe");
 		
@@ -118,16 +107,27 @@ public class SistramiteApplication implements CommandLineRunner{
 		pessoaRepository.saveAll(Arrays.asList(fsc1, fsc2, emp1, emp2));
 		enderecoRepository.saveAll(Arrays.asList(e3, e4, e5, e6));
 		
+		Setor s1 = new Setor(null, "Divida Ativa", 1);
+		Setor s2 = new Setor(null, "Cartório", 2);
+				
 		Auto auto1 = new Auto(null, 25625, emp1, "Auto de Apreensão", "Reclamação", sdf.parse("30/09/2017 10:32"), fsc1);
-		Auto auto2 = new Auto(null, 58962, emp2, "Auto de Constatação", "Reclamação", sdf.parse("31/09/2017 15:11"), fsc2);
+		Auto auto2 = new Auto(null, 58962, emp2, "Auto de Constatação", "Reclamação", sdf.parse("31/09/2017 09:50"), fsc2);
 		
 		emp1.getAutos().addAll(Arrays.asList(auto1));
 		emp2.getAutos().addAll(Arrays.asList(auto2));
 		
 		fsc1.getAutos().addAll(Arrays.asList(auto1));
 		fsc2.getAutos().addAll(Arrays.asList(auto2));
+		
+		Tramite t1 = new Tramite(null, sdf.parse("10/09/2018 08:10"), s1, auto1);
+		
+		s1.getTramites().addAll(Arrays.asList(t1));
 
+		setorRepository.saveAll(Arrays.asList(s1, s2));
+		tramiteRepository.saveAll(Arrays.asList(t1));	
 		autoRepository.saveAll(Arrays.asList(auto1, auto2));
+		
+
 		
 		
 	}

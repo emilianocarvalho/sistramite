@@ -1,6 +1,7 @@
 package com.proconpb.sistramite.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Tramite implements Serializable {
@@ -16,9 +22,15 @@ public class Tramite implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-    //private Date data;
 	
-	//private Auto auto;
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+    private Date dataMovimentacao;
+	
+	@JsonIgnore
+	@OneToOne
+	@JoinColumn(name="auto_id")
+	@MapsId
+	private Auto auto;
 	
 	//private Usuario usuario;
 	
@@ -29,11 +41,12 @@ public class Tramite implements Serializable {
 	public Tramite() {
 	}
 	
-	public Tramite(Integer id, Setor setor) {
+	public Tramite(Integer id, Date dataMovimentacao, Setor setor, Auto auto) {
 		super();
 		this.id = id;
+		this.dataMovimentacao = dataMovimentacao;
 		this.setorDestino = setor;
-	//	this.data = data;
+		this.auto = auto;
 	}
 	
 	public Integer getId() {
@@ -41,6 +54,12 @@ public class Tramite implements Serializable {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public Date getDataMovimentacao() {
+		return dataMovimentacao;
+	}
+	public void setDataMovimentacao(Date dataMovimentacao) {
+		this.dataMovimentacao = dataMovimentacao;
 	}
 	public Setor getSetorDestino() {
 		return setorDestino;
