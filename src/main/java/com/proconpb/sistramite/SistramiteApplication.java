@@ -1,5 +1,6 @@
 package com.proconpb.sistramite;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,12 +8,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.proconpb.sistramite.domain.Auto;
 import com.proconpb.sistramite.domain.Cidade;
 import com.proconpb.sistramite.domain.Endereco;
 import com.proconpb.sistramite.domain.Estado;
 import com.proconpb.sistramite.domain.Pessoa;
+import com.proconpb.sistramite.domain.PessoaFisica;
+import com.proconpb.sistramite.domain.PessoaJuridica;
 import com.proconpb.sistramite.domain.Setor;
 import com.proconpb.sistramite.domain.Tramite;
+import com.proconpb.sistramite.repositories.AutoRepository;
 import com.proconpb.sistramite.repositories.CidadeRepository;
 import com.proconpb.sistramite.repositories.EnderecoRepository;
 import com.proconpb.sistramite.repositories.EstadoRepository;
@@ -41,12 +46,17 @@ public class SistramiteApplication implements CommandLineRunner{
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	
+	@Autowired
+	private AutoRepository autoRepository;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(SistramiteApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy HH:mm");
 		
 		Setor s1 = new Setor(null, "TI", 1);
 		Setor s2 = new Setor(null, "RH", 2);
@@ -72,18 +82,53 @@ public class SistramiteApplication implements CommandLineRunner{
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
-		Pessoa p1 = new Pessoa(null, "Maria", "maria@gmail.com");
-		Pessoa p2 = new Pessoa(null, "Jose", "jose@gmail.com");
+		//Pessoa p1 = new Usuario(null, "Maria", "maria@procon.pb.gov.br");
+		//Pessoa p2 = new Usuario(null, "Darcio", "darcio@procon.pb.gov.br");
 		
-		p1.getTelefones().addAll(Arrays.asList("32334286", "988532053"));
-		p2.getTelefones().addAll(Arrays.asList("32334286", "988567422"));
+		//p1.getTelefones().addAll(Arrays.asList("32334286", "988532053"));
+		//p2.getTelefones().addAll(Arrays.asList("32334286", "988567422"));
 		
-		Endereco e1 = new Endereco(null, "Rua Flores", "912", "casa", "Geisel", "58079070", p1, c1);
-		Endereco e2 = new Endereco(null, "Rua Ávidos", "1209", "casa", "Planalto", "58088010", p2, c1);
+		//Endereco e1 = new Endereco(null, "Rua Flores", "912", "casa", "Geisel", "58079070", p1, c1);
+		//Endereco e2 = new Endereco(null, "Rua Ávidos", "1209", "casa", "Planalto", "58088010", p2, c1);
 		
-		p1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		//p1.getEnderecos().addAll(Arrays.asList(e1, e2));
 		
-		pessoaRepository.saveAll(Arrays.asList(p1, p2));
-		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		//pessoaRepository.saveAll(Arrays.asList(p1, p2));
+		//enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		
+		Pessoa emp1 = new PessoaJuridica(null, "Americanas", "sac@americanas.com", "12789456000125", "Lojas Americanas LTDA");
+		Pessoa emp2 = new PessoaJuridica(null, "Carrefour", "sac@carrefour.com", "98654321000154", "Carrefour LTDA");
+		
+		Pessoa fsc1 = new PessoaFisica(null, "Nataluan", "nataluan@procon.pb.gov.br", "12378945612", "1759842", "Fiscal");
+		Pessoa fsc2 = new PessoaFisica(null, "Santana", "santana@procon.pb.gov.br", "98732165423", "885421", "Fiscal");
+		
+		Endereco e3 = new Endereco(null, "Rua Ladislau", "12", "casa", "Funcionarios", "58079070", emp1, c1);
+		Endereco e4 = new Endereco(null, "Rua Noemia", "45", "casa", "João Paulo II", "58079071", fsc2, c3);
+		Endereco e5 = new Endereco(null, "Rua Bento Morais", "854", "casa", "Geisel", "58079072", fsc1, c2);
+		Endereco e6 = new Endereco(null, "Rua do Arame", "654", "casa", "Grotão", "58079073", emp2, c3);
+		
+		emp1.getEnderecos().addAll(Arrays.asList(e3));
+		emp1.getTelefones().addAll(Arrays.asList("32335689", "986007619"));
+		emp2.getEnderecos().addAll(Arrays.asList(e6));
+		
+		fsc1.getEnderecos().addAll(Arrays.asList(e5));
+		fsc1.getTelefones().addAll(Arrays.asList("32241960", "988556699"));
+		fsc2.getEnderecos().addAll(Arrays.asList(e4));
+		
+		pessoaRepository.saveAll(Arrays.asList(fsc1, fsc2, emp1, emp2));
+		enderecoRepository.saveAll(Arrays.asList(e3, e4, e5, e6));
+		
+		Auto auto1 = new Auto(null, 25625, emp1, "Auto de Apreensão", "Reclamação", sdf.parse("30/09/2017 10:32"), fsc1);
+		Auto auto2 = new Auto(null, 58962, emp2, "Auto de Constatação", "Reclamação", sdf.parse("31/09/2017 15:11"), fsc2);
+		
+		emp1.getAutos().addAll(Arrays.asList(auto1));
+		emp2.getAutos().addAll(Arrays.asList(auto2));
+		
+		fsc1.getAutos().addAll(Arrays.asList(auto1));
+		fsc2.getAutos().addAll(Arrays.asList(auto2));
+
+		autoRepository.saveAll(Arrays.asList(auto1, auto2));
+		
+		
 	}
 }

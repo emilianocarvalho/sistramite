@@ -17,7 +17,9 @@ public class Tramite implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
     //private Date data;
+	
 	//private Auto auto;
+	
 	//private Usuario usuario;
 	
 	@ManyToOne

@@ -17,12 +17,13 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
-public class Pessoa implements Serializable{
+public abstract class Pessoa implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -31,6 +32,7 @@ public class Pessoa implements Serializable{
 	private String nome;
 	private String email;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="pessoa", cascade=CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
@@ -38,9 +40,9 @@ public class Pessoa implements Serializable{
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
-	// @JsonIgnore
-	// @OneToMany(mappedBy="autos")
-	// private List<Auto> autos = new ArrayList<>();
+	@JsonIgnore
+	@OneToMany
+	private List<Auto> autos = new ArrayList<>();;
 
 	public Pessoa() {
 		
@@ -92,9 +94,13 @@ public class Pessoa implements Serializable{
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
+	
+	public List<Auto> getAutos() {
+		return autos;
+	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setAutos(List<Auto> autos) {
+		this.autos = autos;
 	}
 
 	@Override
@@ -121,7 +127,6 @@ public class Pessoa implements Serializable{
 			return false;
 		return true;
 	}
-	
 	
 	
 }
