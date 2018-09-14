@@ -17,6 +17,7 @@ import com.proconpb.sistramite.domain.PessoaFisica;
 import com.proconpb.sistramite.domain.PessoaJuridica;
 import com.proconpb.sistramite.domain.Setor;
 import com.proconpb.sistramite.domain.Tramite;
+import com.proconpb.sistramite.domain.Usuario;
 import com.proconpb.sistramite.repositories.AutoRepository;
 import com.proconpb.sistramite.repositories.CidadeRepository;
 import com.proconpb.sistramite.repositories.EnderecoRepository;
@@ -61,9 +62,9 @@ public class SistramiteApplication implements CommandLineRunner{
 		Estado est1 = new Estado(null, "Paraíba");
 		Estado est2 = new Estado(null, "Sergipe");
 		
-		Cidade c1 = new Cidade(null, "Patos", est1);
+		Cidade c1 = new Cidade(null, "João Pessoa", est1);
 		Cidade c2 = new Cidade(null, "Aracajú", est2);
-		Cidade c3 = new Cidade(null, "Sapé", est1);
+		Cidade c3 = new Cidade(null, "Bayeux", est1);
 		
 		est1.getCidades().addAll(Arrays.asList(c1, c3));
 		est2.getCidades().addAll(Arrays.asList(c2));
@@ -71,19 +72,19 @@ public class SistramiteApplication implements CommandLineRunner{
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
-		//Pessoa p1 = new Usuario(null, "Maria", "maria@procon.pb.gov.br");
-		//Pessoa p2 = new Usuario(null, "Darcio", "darcio@procon.pb.gov.br");
+		Pessoa p1 = new Usuario(null, "Maria", "maria@procon.pb.gov.br", "Maria", "123456");
+		Pessoa p2 = new Usuario(null, "Darcio", "darcio@procon.pb.gov.br", "Darcio", "123");
 		
-		//p1.getTelefones().addAll(Arrays.asList("32334286", "988532053"));
-		//p2.getTelefones().addAll(Arrays.asList("32334286", "988567422"));
+		p1.getTelefones().addAll(Arrays.asList("32334286", "988532053"));
+		p2.getTelefones().addAll(Arrays.asList("32334286", "988567422"));
 		
-		//Endereco e1 = new Endereco(null, "Rua Flores", "912", "casa", "Geisel", "58079070", p1, c1);
-		//Endereco e2 = new Endereco(null, "Rua Ávidos", "1209", "casa", "Planalto", "58088010", p2, c1);
+		Endereco e1 = new Endereco(null, "Rua Juscelino Kubitscheck", "692", "casa", "Geisel", "58075400", p1, c1);
+		Endereco e2 = new Endereco(null, "Rua Eng. Ávidos", "1209", "casa", "J. Planalto", "58088010", p2, c1);
 		
-		//p1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		p1.getEnderecos().addAll(Arrays.asList(e1, e2));
 		
-		//pessoaRepository.saveAll(Arrays.asList(p1, p2));
-		//enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		pessoaRepository.saveAll(Arrays.asList(p1, p2));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 		
 		Pessoa emp1 = new PessoaJuridica(null, "Americanas", "sac@americanas.com", "12789456000125", "Lojas Americanas LTDA");
 		Pessoa emp2 = new PessoaJuridica(null, "Carrefour", "sac@carrefour.com", "98654321000154", "Carrefour LTDA");
@@ -91,10 +92,10 @@ public class SistramiteApplication implements CommandLineRunner{
 		Pessoa fsc1 = new PessoaFisica(null, "Nataluan", "nataluan@procon.pb.gov.br", "12378945612", "1759842", "Fiscal");
 		Pessoa fsc2 = new PessoaFisica(null, "Santana", "santana@procon.pb.gov.br", "98732165423", "885421", "Fiscal");
 		
-		Endereco e3 = new Endereco(null, "Rua Ladislau", "12", "casa", "Funcionarios", "58079070", emp1, c1);
-		Endereco e4 = new Endereco(null, "Rua Noemia", "45", "casa", "João Paulo II", "58079071", fsc2, c3);
-		Endereco e5 = new Endereco(null, "Rua Bento Morais", "854", "casa", "Geisel", "58079072", fsc1, c2);
-		Endereco e6 = new Endereco(null, "Rua do Arame", "654", "casa", "Grotão", "58079073", emp2, c3);
+		Endereco e3 = new Endereco(null, "Rua Urquiza Leal", "900", "casa", "Salgado Filho", "49020490", emp1, c2);
+		Endereco e4 = new Endereco(null, "Rua Tomé de Souza", "299", "casa", "Imaculada", "58309250", fsc2, c3);
+		Endereco e5 = new Endereco(null, "Rua Ladislau", "86", "casa", "Funcionarios II", "58079070", fsc1, c1);
+		Endereco e6 = new Endereco(null, "Rua Recife", "89", "casa", "Grotão", "58079786", emp2, c1);
 		
 		emp1.getEnderecos().addAll(Arrays.asList(e3));
 		emp1.getTelefones().addAll(Arrays.asList("32335689", "986007619"));
@@ -126,9 +127,6 @@ public class SistramiteApplication implements CommandLineRunner{
 		setorRepository.saveAll(Arrays.asList(s1, s2));
 		tramiteRepository.saveAll(Arrays.asList(t1));	
 		autoRepository.saveAll(Arrays.asList(auto1, auto2));
-		
-
-		
 		
 	}
 }
