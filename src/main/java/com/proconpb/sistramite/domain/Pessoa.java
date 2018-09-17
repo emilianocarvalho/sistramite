@@ -32,7 +32,6 @@ public abstract class Pessoa implements Serializable{
 	private String nome;
 	private String email;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy="pessoa", cascade=CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
@@ -105,6 +104,14 @@ public abstract class Pessoa implements Serializable{
 
 	public void setAutos(List<Auto> autos) {
 		this.autos = autos;
+	}
+
+	public List<Tramite> getTramites() {
+		return tramites;
+	}
+
+	public void setTramites(List<Tramite> tramites) {
+		this.tramites = tramites;
 	}
 
 	@Override

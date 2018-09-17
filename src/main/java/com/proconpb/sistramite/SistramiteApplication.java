@@ -108,8 +108,8 @@ public class SistramiteApplication implements CommandLineRunner{
 		pessoaRepository.saveAll(Arrays.asList(fsc1, fsc2, emp1, emp2));
 		enderecoRepository.saveAll(Arrays.asList(e3, e4, e5, e6));
 		
-		Setor s1 = new Setor(null, "Divida Ativa", 1);
-		Setor s2 = new Setor(null, "Cartório", 2);
+		Setor s1 = new Setor(null, "Divida Ativa");
+		Setor s2 = new Setor(null, "Cartório");
 				
 		Auto auto1 = new Auto(null, 25625, emp1, "Auto de Apreensão", "Reclamação", sdf.parse("30/09/2017 10:32"), fsc1);
 		Auto auto2 = new Auto(null, 58962, emp2, "Auto de Constatação", "Reclamação", sdf.parse("31/09/2017 09:50"), fsc2);

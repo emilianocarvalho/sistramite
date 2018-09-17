@@ -21,7 +21,6 @@ public class Setor implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private Integer codigo;
 	
 	@JsonIgnore
 	@OneToMany
@@ -32,11 +31,10 @@ public class Setor implements Serializable {
 		
 	}
 
-	public Setor(Integer id, String nome, Integer codigo) {
+	public Setor(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.codigo = codigo;
 	}
 
 
@@ -56,14 +54,8 @@ public class Setor implements Serializable {
 		this.nome = nome;
 	}
 
-	public Integer getCodigo() {
-		return codigo;
-	}
 
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
-	}
-
+	@JsonIgnore
 	public List<Tramite> getTramites() {
 		return tramites;
 	}

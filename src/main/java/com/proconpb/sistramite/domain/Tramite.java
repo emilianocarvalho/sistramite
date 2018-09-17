@@ -13,7 +13,6 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Tramite implements Serializable {
@@ -26,7 +25,10 @@ public class Tramite implements Serializable {
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private Date dataMovimentacao;
 	
-	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="setor_id")
+	private Setor setorDestino;
+	
 	@OneToOne
 	@JoinColumn(name="auto_id")
 	@MapsId
@@ -36,9 +38,6 @@ public class Tramite implements Serializable {
 	@JoinColumn(name="usuario_id")
 	private Pessoa usuario;
 	
-	@ManyToOne
-	@JoinColumn(name="setor_id")
-	private Setor setorDestino;
 	
 	public Tramite() {
 	}

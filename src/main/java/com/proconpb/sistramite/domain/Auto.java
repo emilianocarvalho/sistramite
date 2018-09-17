@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Auto implements Serializable{
@@ -109,6 +110,14 @@ public class Auto implements Serializable{
 
 	public void setFiscal(Pessoa fiscal) {
 		this.fiscal = fiscal;
+	}
+	
+	public Tramite getTramite() {
+		return tramite;
+	}
+
+	public void setTramite(Tramite tramite) {
+		this.tramite = tramite;
 	}
 
 	@Override

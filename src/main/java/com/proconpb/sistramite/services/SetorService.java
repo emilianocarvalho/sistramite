@@ -20,4 +20,9 @@ public class SetorService {
 		Optional<Setor> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Setor não encontrado! Id: " + id + ", Tipo: " + Setor.class.getName()));
 	}
+	
+	public Setor insert(Setor obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
 }
