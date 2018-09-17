@@ -4,10 +4,12 @@ package com.proconpb.sistramite.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.proconpb.sistramite.domain.Setor;
 import com.proconpb.sistramite.repositories.SetorRepository;
+import com.proconpb.sistramite.services.exceptions.DataIntegrityException;
 import com.proconpb.sistramite.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -29,5 +31,15 @@ public class SetorService {
 	public Setor update(Setor obj) {
 		find(obj.getId());
 		return repo.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		find(id);
+		try {
+			repo.deleteById(id);
+		}
+		catch(DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir um setor que possui trâmites.");
+		}
 	}
 }
