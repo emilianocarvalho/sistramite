@@ -25,4 +25,9 @@ public class SetorService {
 		obj.setId(null);
 		return repo.save(obj);
 	}
+	
+	public Setor update(Setor obj) {
+		find(obj.getId());
+		return repo.save(obj);
+	}
 }

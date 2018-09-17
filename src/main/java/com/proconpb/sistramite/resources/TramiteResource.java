@@ -18,7 +18,7 @@ public class TramiteResource {
 	private TramiteService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Tramite> find(@PathVariable Integer id) {
 		
 		Tramite obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
