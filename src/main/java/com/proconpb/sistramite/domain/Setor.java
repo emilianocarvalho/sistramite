@@ -23,8 +23,7 @@ public class Setor implements Serializable {
 	private String nome;
 	
 	@JsonIgnore
-	@OneToMany
-	(mappedBy="setorDestino")
+	@OneToMany(mappedBy="setorDestino")
 	private List<Tramite> tramites = new ArrayList<>();
 	
 	public Setor() {

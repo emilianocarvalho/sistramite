@@ -1,6 +1,8 @@
 package com.proconpb.sistramite.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.proconpb.sistramite.domain.Setor;
+import com.proconpb.sistramite.dto.SetorDTO;
 import com.proconpb.sistramite.services.SetorService;
 
 @RestController
@@ -45,5 +48,12 @@ public class SetorResource {
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<SetorDTO>> findAll() {
+		List<Setor> list = service.findAll();
+		List<SetorDTO> listDto = list.stream().map(obj -> new SetorDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 }
