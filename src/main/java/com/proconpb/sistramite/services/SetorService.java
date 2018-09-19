@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.proconpb.sistramite.domain.Setor;
+import com.proconpb.sistramite.dto.SetorDTO;
 import com.proconpb.sistramite.repositories.SetorRepository;
 import com.proconpb.sistramite.services.exceptions.DataIntegrityException;
 import com.proconpb.sistramite.services.exceptions.ObjectNotFoundException;
@@ -54,5 +55,9 @@ public class SetorService {
 	public Page<Setor> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Setor fromDTO(SetorDTO objDto) {
+		return new Setor(objDto.getId(), objDto.getNome());
 	}
 }
