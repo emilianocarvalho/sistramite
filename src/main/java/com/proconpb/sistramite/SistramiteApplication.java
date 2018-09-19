@@ -110,6 +110,11 @@ public class SistramiteApplication implements CommandLineRunner{
 		
 		Setor s1 = new Setor(null, "Divida Ativa");
 		Setor s2 = new Setor(null, "Cartório");
+		Setor s3 = new Setor(null, "Fiscalização");
+		Setor s4 = new Setor(null, "Financeiro");
+		Setor s5 = new Setor(null, "Administração");
+		Setor s6 = new Setor(null, "Chefia de Gabinete");
+		Setor s7= new Setor(null, "T.I.");
 				
 		Auto auto1 = new Auto(null, 25625, emp1, "Auto de Apreensão", "Reclamação", sdf.parse("30/09/2017 10:32"), fsc1);
 		Auto auto2 = new Auto(null, 58962, emp2, "Auto de Constatação", "Reclamação", sdf.parse("31/09/2017 09:50"), fsc2);
@@ -124,7 +129,7 @@ public class SistramiteApplication implements CommandLineRunner{
 		
 		s1.getTramites().addAll(Arrays.asList(t1));
 
-		setorRepository.saveAll(Arrays.asList(s1, s2));
+		setorRepository.saveAll(Arrays.asList(s1, s2, s3, s4, s5, s6, s7));
 		tramiteRepository.saveAll(Arrays.asList(t1));	
 		autoRepository.saveAll(Arrays.asList(auto1, auto2));
 		
