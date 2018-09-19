@@ -34,8 +34,9 @@ public class SetorService {
 	}
 	
 	public Setor update(Setor obj) {
-		find(obj.getId());
-		return repo.save(obj);
+		Setor newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 	
 	public void delete(Integer id) {
@@ -59,5 +60,9 @@ public class SetorService {
 	
 	public Setor fromDTO(SetorDTO objDto) {
 		return new Setor(objDto.getId(), objDto.getNome());
+	}
+	
+	private void updateData(Setor newObj, Setor obj) {
+		newObj.setNome(obj.getNome());
 	}
 }

@@ -40,7 +40,7 @@ public class PessoaService {
 			repo.deleteById(id);
 		}
 		catch(DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possível excluir uma pessoa que possui trâmites.");
+			throw new DataIntegrityException("Não é possível excluir porque há entidades relacionadas.");
 		}
 	}
 	
