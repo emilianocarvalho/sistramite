@@ -86,11 +86,11 @@ public class SistramiteApplication implements CommandLineRunner{
 		pessoaRepository.saveAll(Arrays.asList(usu1, usu2));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 		
-		Pessoa emp1 = new PessoaJuridica(null, "Americanas", "sac@americanas.com", "12789456000125", "Lojas Americanas LTDA");
-		Pessoa emp2 = new PessoaJuridica(null, "Carrefour", "sac@carrefour.com", "98654321000154", "Carrefour LTDA");
+		Pessoa emp1 = new PessoaJuridica(null, "Americanas", "sac@americanas.com", "76293655000167", "Lojas Americanas LTDA");
+		Pessoa emp2 = new PessoaJuridica(null, "Carrefour", "sac@carrefour.com", "60046057000153", "Carrefour LTDA");
 		
-		Pessoa fsc1 = new PessoaFisica(null, "Nataluan", "nataluan@procon.pb.gov.br", "12378945612", "1759842", "Fiscal");
-		Pessoa fsc2 = new PessoaFisica(null, "Santana", "santana@procon.pb.gov.br", "98732165423", "885421", "Fiscal");
+		Pessoa fsc1 = new PessoaFisica(null, "Nataluan", "nataluan@procon.pb.gov.br", "21482109042", "1759842", "Fiscal");
+		Pessoa fsc2 = new PessoaFisica(null, "Santana", "santana@procon.pb.gov.br", "40690425040", "885421", "Fiscal");
 		
 		Endereco e3 = new Endereco(null, "Rua Urquiza Leal", "900", "casa", "Salgado Filho", "49020490", emp1, c2);
 		Endereco e4 = new Endereco(null, "Rua Tomé de Souza", "299", "casa", "Imaculada", "58309250", fsc2, c3);

@@ -1,13 +1,22 @@
 package com.proconpb.sistramite.domain;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 public class PessoaFisica extends Pessoa {
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
+	@CPF(message="CPF inválido")
 	private String cpf;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String matricula;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String funcao;
 
 	public PessoaFisica() {
