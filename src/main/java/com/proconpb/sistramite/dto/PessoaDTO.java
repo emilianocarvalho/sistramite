@@ -8,7 +8,9 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.proconpb.sistramite.domain.Pessoa;
+import com.proconpb.sistramite.services.validation.PessoaUpdate;
 
+@PessoaUpdate
 public class PessoaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
