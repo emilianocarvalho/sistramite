@@ -5,12 +5,15 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 @Entity
+@JsonTypeName("pessoaFisica")
 public class PessoaFisica extends Pessoa {
 	private static final long serialVersionUID = 1L;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
-	@CPF(message="CPF inválido")
+	@CPF
 	private String cpf;
 	
 	@NotEmpty(message="Preenchimento obrigatório")

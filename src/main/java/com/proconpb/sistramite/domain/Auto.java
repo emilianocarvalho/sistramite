@@ -1,7 +1,9 @@
 package com.proconpb.sistramite.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,9 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Auto implements Serializable{
@@ -23,7 +26,8 @@ public class Auto implements Serializable{
 	private Integer id;
 	private Integer numero;
 	
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name="empresa_id")
 	private Pessoa empresa;
 	
 	private String tipoDeInfracao;
@@ -36,8 +40,9 @@ public class Auto implements Serializable{
 	@JoinColumn(name="fiscal_id")
 	private Pessoa fiscal;
 	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="auto")
-	private Tramite tramite;
+	@JsonIgnore
+	@OneToMany(mappedBy="auto", cascade=CascadeType.ALL)
+	private List<Tramite> tramites = new ArrayList<>();
 	
 	public Auto() {
 		
@@ -110,13 +115,13 @@ public class Auto implements Serializable{
 	public void setFiscal(Pessoa fiscal) {
 		this.fiscal = fiscal;
 	}
-	
-	public Tramite getTramite() {
-		return tramite;
+
+	public List<Tramite> getTramites() {
+		return tramites;
 	}
 
-	public void setTramite(Tramite tramite) {
-		this.tramite = tramite;
+	public void setTramites(List<Tramite> tramites) {
+		this.tramites = tramites;
 	}
 
 	@Override

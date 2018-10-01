@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -29,9 +27,8 @@ public class Tramite implements Serializable {
 	@JoinColumn(name="setor_id")
 	private Setor setorDestino;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="auto_id")
-	@MapsId
 	private Auto auto;
 	
 	@ManyToOne

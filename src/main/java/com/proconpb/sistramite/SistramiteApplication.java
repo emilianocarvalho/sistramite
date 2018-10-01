@@ -126,12 +126,17 @@ public class SistramiteApplication implements CommandLineRunner{
 		fsc2.getAutos().addAll(Arrays.asList(auto2));
 		
 		Tramite t1 = new Tramite(null, sdf.parse("10/09/2018 08:10"), s1, auto1, usu1);
+		Tramite t2 = new Tramite(null, sdf.parse("10/09/2018 08:20"), s1, auto2, usu1);
 		
 		s1.getTramites().addAll(Arrays.asList(t1));
-
+		s1.getTramites().addAll(Arrays.asList(t2));
+		
+		auto1.getTramites().addAll(Arrays.asList(t1));
+		auto2.getTramites().addAll(Arrays.asList(t2));
+		
 		setorRepository.saveAll(Arrays.asList(s1, s2, s3, s4, s5, s6, s7));
-		tramiteRepository.saveAll(Arrays.asList(t1));	
 		autoRepository.saveAll(Arrays.asList(auto1, auto2));
+		tramiteRepository.saveAll(Arrays.asList(t1, t2));
 		
 	}
 }

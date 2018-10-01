@@ -5,12 +5,15 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 @Entity
+@JsonTypeName("pessoaJuridica")
 public class PessoaJuridica extends Pessoa {
 	private static final long serialVersionUID = 1L;
 
 	@NotEmpty(message="Preenchimento obrigatório")
-	@CNPJ(message="CNPJ inválido")
+	@CNPJ
 	private String cnpj;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
