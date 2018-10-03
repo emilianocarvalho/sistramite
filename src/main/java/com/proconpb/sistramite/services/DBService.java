@@ -28,26 +28,22 @@ import com.proconpb.sistramite.repositories.TramiteRepository;
 @Service
 public class DBService {
 
+	
 	@Autowired
 	private SetorRepository setorRepository;
-	
 	@Autowired
 	private TramiteRepository tramiteRepository;
-	
 	@Autowired
 	private EstadoRepository estadoRepository;
-	
 	@Autowired
 	private CidadeRepository cidadeRepository;
-	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
 	@Autowired
 	private PessoaRepository pessoaRepository;
-	
 	@Autowired
 	private AutoRepository autoRepository;
+
 	
 	public void instantiateTestDatabase() throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy HH:mm");
