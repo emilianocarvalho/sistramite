@@ -1,6 +1,7 @@
 package com.proconpb.sistramite.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -35,4 +36,11 @@ public class AutoResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<Auto>> findAll() {
+		List<Auto> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+	}
+	
 }
