@@ -22,7 +22,7 @@ import com.proconpb.sistramite.dto.SetorDTO;
 import com.proconpb.sistramite.services.SetorService;
 
 @RestController
-@RequestMapping(value="/setor")
+@RequestMapping(value="/setores")
 public class SetorResource {
 	
 	@Autowired

@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.proconpb.sistramite.domain.Auto;
-import com.proconpb.sistramite.domain.PessoaJuridica;
+import com.proconpb.sistramite.domain.Fornecedor;
 import com.proconpb.sistramite.domain.Servidor;
 import com.proconpb.sistramite.repositories.AutoRepository;
-import com.proconpb.sistramite.repositories.PessoaJuridicaRepository;
+import com.proconpb.sistramite.repositories.FornecedorRepository;
 import com.proconpb.sistramite.repositories.ServidorRepository;
 import com.proconpb.sistramite.services.exceptions.ObjectNotFoundException;
 
@@ -26,7 +26,8 @@ public class AutoService {
 	private ServidorRepository servidorRepo;
 	
 	@Autowired
-	private PessoaJuridicaRepository pJRepo;
+	private FornecedorRepository fornecedorRepo;
+	
 	
 	public Auto find(Integer id) {
 		Optional<Auto> obj = repo.findById(id);
@@ -36,9 +37,9 @@ public class AutoService {
 	@Transactional
 	public Auto insert(Auto obj) {
 		obj.setId(null);		
-		if (obj.getEmpresa() instanceof PessoaJuridica){
-			PessoaJuridica empresa = (PessoaJuridica) obj.getEmpresa();
-			pJRepo.save(empresa);
+		if (obj.getEmpresa() instanceof Fornecedor){
+			Fornecedor empresa = (Fornecedor) obj.getEmpresa();
+			fornecedorRepo.save(empresa);
 		}		
 		if (obj.getFiscal() instanceof Servidor){
 			Servidor fiscal = (Servidor) obj.getFiscal();

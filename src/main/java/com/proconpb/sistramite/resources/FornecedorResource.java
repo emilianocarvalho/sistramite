@@ -23,7 +23,7 @@ import com.proconpb.sistramite.dto.FornecedorNewDTO;
 import com.proconpb.sistramite.services.FornecedorService;
 
 @RestController
-@RequestMapping(value="/fornecedor")
+@RequestMapping(value="/fornecedores")
 public class FornecedorResource {
 	
 	@Autowired
