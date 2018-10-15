@@ -33,13 +33,13 @@ public class Tramite implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
-	private Pessoa usuario;
+	private Usuario usuario;
 	
 	
 	public Tramite() {
 	}
 	
-	public Tramite(Integer id, Date dataMovimentacao, Setor setor, Auto auto, Pessoa usuario) {
+	public Tramite(Integer id, Date dataMovimentacao, Setor setor, Auto auto, Usuario usuario) {
 		super();
 		this.id = id;
 		this.dataMovimentacao = dataMovimentacao;
@@ -75,11 +75,11 @@ public class Tramite implements Serializable {
 		this.auto = auto;
 	}
 
-	public Pessoa getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Pessoa usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 

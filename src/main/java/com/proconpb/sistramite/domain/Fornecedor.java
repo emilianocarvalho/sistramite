@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -24,18 +25,23 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
-public class Pessoa implements Serializable{
+public class Fornecedor implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
+	private String razaoSocial;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
+	private String nomeFantasia;
 	
 	@Column(unique=true)
 	private String email;
 	
-	@OneToMany(mappedBy="pessoa", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="fornecedor", cascade=CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	@ElementCollection
@@ -50,13 +56,14 @@ public class Pessoa implements Serializable{
 	@OneToMany
 	private List<Tramite> tramites = new ArrayList<>();
 
-	public Pessoa() {
+	public Fornecedor() {
 	}
 
-	public Pessoa(Integer id, String nome, String email) {
+	public Fornecedor(Integer id, String razaoSocial, String nomeFantasia, String email) {
 		super();
 		this.id = id;
-		this.nome = nome;
+		this.razaoSocial = razaoSocial;
+		this.nomeFantasia = nomeFantasia;
 		this.email = email;
 	}
 
@@ -67,13 +74,20 @@ public class Pessoa implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	public String getRazaoSocial() {
+		return razaoSocial;
+	}
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
+	}	
 
-	public String getNome() {
-		return nome;
+	public String getNomeFantasia() {
+		return nomeFantasia;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
 	}
 
 	public String getEmail() {
@@ -115,6 +129,7 @@ public class Pessoa implements Serializable{
 	public void setTramites(List<Tramite> tramites) {
 		this.tramites = tramites;
 	}
+	
 
 	@Override
 	public int hashCode() {
@@ -132,7 +147,7 @@ public class Pessoa implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pessoa other = (Pessoa) obj;
+		Fornecedor other = (Fornecedor) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -143,3 +158,4 @@ public class Pessoa implements Serializable{
 	
 	
 }
+

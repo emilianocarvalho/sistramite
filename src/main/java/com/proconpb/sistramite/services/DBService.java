@@ -11,9 +11,9 @@ import com.proconpb.sistramite.domain.Auto;
 import com.proconpb.sistramite.domain.Cidade;
 import com.proconpb.sistramite.domain.Endereco;
 import com.proconpb.sistramite.domain.Estado;
-import com.proconpb.sistramite.domain.Pessoa;
-import com.proconpb.sistramite.domain.PessoaFisica;
+import com.proconpb.sistramite.domain.Fornecedor;
 import com.proconpb.sistramite.domain.PessoaJuridica;
+import com.proconpb.sistramite.domain.Servidor;
 import com.proconpb.sistramite.domain.Setor;
 import com.proconpb.sistramite.domain.Tramite;
 import com.proconpb.sistramite.domain.Usuario;
@@ -21,9 +21,11 @@ import com.proconpb.sistramite.repositories.AutoRepository;
 import com.proconpb.sistramite.repositories.CidadeRepository;
 import com.proconpb.sistramite.repositories.EnderecoRepository;
 import com.proconpb.sistramite.repositories.EstadoRepository;
-import com.proconpb.sistramite.repositories.PessoaRepository;
+import com.proconpb.sistramite.repositories.FornecedorRepository;
+import com.proconpb.sistramite.repositories.ServidorRepository;
 import com.proconpb.sistramite.repositories.SetorRepository;
 import com.proconpb.sistramite.repositories.TramiteRepository;
+import com.proconpb.sistramite.repositories.UsuarioRepository;
 
 @Service
 public class DBService {
@@ -40,7 +42,11 @@ public class DBService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	@Autowired
-	private PessoaRepository pessoaRepository;
+	private UsuarioRepository usuarioRepository;
+	@Autowired
+	private ServidorRepository servidorRepository;
+	@Autowired
+	private FornecedorRepository fornecedorRepository;
 	@Autowired
 	private AutoRepository autoRepository;
 
@@ -61,41 +67,22 @@ public class DBService {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
-		Pessoa usu1 = new Usuario(null, "Maria", "maria@procon.pb.gov.br", "Maria", "123456");
-		Pessoa usu2 = new Usuario(null, "Darcio", "darcio@procon.pb.gov.br", "Darcio", "123");
+		Fornecedor emp1 = new PessoaJuridica(null, "Lojas Americanas LTDA", "Americanas", "sac@americanas.com", "76293655000167");
+		Fornecedor emp2 = new PessoaJuridica(null, "Carrefour LTDA", "Carrefour", "sac@carrefour.com", "60046057000153");
 		
-		usu1.getTelefones().addAll(Arrays.asList("32334286", "988532053"));
-		usu2.getTelefones().addAll(Arrays.asList("32334286", "988567422"));
+		Servidor fsc1 = new Servidor(null, "Nataluan", "1759842", "Fiscal");
+		Servidor fsc2 = new Servidor(null, "Santana", "885421", "Fiscal");
 		
-		Endereco e1 = new Endereco(null, "Rua Juscelino Kubitscheck", "692", "casa", "Geisel", "58075400", usu1, c1);
-		Endereco e2 = new Endereco(null, "Rua Eng. Ávidos", "1209", "casa", "J. Planalto", "58088010", usu2, c1);
+		Endereco e1 = new Endereco(null, "Rua Urquiza Leal", "900", "casa", "Salgado Filho", "49020490", emp1, c2);
+		Endereco e2 = new Endereco(null, "Rua Recife", "89", "casa", "Grotão", "58079786", emp2, c1);
 		
-		usu1.getEnderecos().addAll(Arrays.asList(e1, e2));
-		
-		pessoaRepository.saveAll(Arrays.asList(usu1, usu2));
-		enderecoRepository.saveAll(Arrays.asList(e1, e2));
-		
-		Pessoa emp1 = new PessoaJuridica(null, "Americanas", "sac@americanas.com", "76293655000167", "Lojas Americanas LTDA");
-		Pessoa emp2 = new PessoaJuridica(null, "Carrefour", "sac@carrefour.com", "60046057000153", "Carrefour LTDA");
-		
-		Pessoa fsc1 = new PessoaFisica(null, "Nataluan", "nataluan@procon.pb.gov.br", "21482109042", "1759842", "Fiscal");
-		Pessoa fsc2 = new PessoaFisica(null, "Santana", "santana@procon.pb.gov.br", "40690425040", "885421", "Fiscal");
-		
-		Endereco e3 = new Endereco(null, "Rua Urquiza Leal", "900", "casa", "Salgado Filho", "49020490", emp1, c2);
-		Endereco e4 = new Endereco(null, "Rua Tomé de Souza", "299", "casa", "Imaculada", "58309250", fsc2, c3);
-		Endereco e5 = new Endereco(null, "Rua Ladislau", "86", "casa", "Funcionarios II", "58079070", fsc1, c1);
-		Endereco e6 = new Endereco(null, "Rua Recife", "89", "casa", "Grotão", "58079786", emp2, c1);
-		
-		emp1.getEnderecos().addAll(Arrays.asList(e3));
+		emp1.getEnderecos().addAll(Arrays.asList(e1));
 		emp1.getTelefones().addAll(Arrays.asList("32335689", "986007619"));
-		emp2.getEnderecos().addAll(Arrays.asList(e6));
+		emp2.getEnderecos().addAll(Arrays.asList(e2));
 		
-		fsc1.getEnderecos().addAll(Arrays.asList(e5));
-		fsc1.getTelefones().addAll(Arrays.asList("32241960", "988556699"));
-		fsc2.getEnderecos().addAll(Arrays.asList(e4));
-		
-		pessoaRepository.saveAll(Arrays.asList(fsc1, fsc2, emp1, emp2));
-		enderecoRepository.saveAll(Arrays.asList(e3, e4, e5, e6));
+		servidorRepository.saveAll(Arrays.asList(fsc1, fsc2));
+		fornecedorRepository.saveAll(Arrays.asList(emp1, emp2));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 		
 		Setor s1 = new Setor(null, "Divida Ativa");
 		Setor s2 = new Setor(null, "Cartório");
@@ -114,6 +101,10 @@ public class DBService {
 		fsc1.getAutos().addAll(Arrays.asList(auto1));
 		fsc2.getAutos().addAll(Arrays.asList(auto2));
 		
+		Usuario usu1 = new Usuario(null, "maria@procon.pb.gov.br", "123456");
+		Usuario usu2 = new Usuario(null, "darcio@procon.pb.gov.br", "123");
+
+		
 		Tramite t1 = new Tramite(null, sdf.parse("10/09/2018 08:10"), s1, auto1, usu1);
 		Tramite t2 = new Tramite(null, sdf.parse("10/09/2018 08:20"), s1, auto2, usu1);
 		
@@ -123,6 +114,7 @@ public class DBService {
 		auto1.getTramites().addAll(Arrays.asList(t1));
 		auto2.getTramites().addAll(Arrays.asList(t2));
 		
+		usuarioRepository.saveAll(Arrays.asList(usu1, usu2));
 		setorRepository.saveAll(Arrays.asList(s1, s2, s3, s4, s5, s6, s7));
 		autoRepository.saveAll(Arrays.asList(auto1, auto2));
 		tramiteRepository.saveAll(Arrays.asList(t1, t2));

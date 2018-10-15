@@ -17,37 +17,37 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.proconpb.sistramite.domain.Pessoa;
-import com.proconpb.sistramite.dto.PessoaDTO;
-import com.proconpb.sistramite.dto.PessoaNewDTO;
-import com.proconpb.sistramite.services.PessoaService;
+import com.proconpb.sistramite.domain.Fornecedor;
+import com.proconpb.sistramite.dto.FornecedorDTO;
+import com.proconpb.sistramite.dto.FornecedorNewDTO;
+import com.proconpb.sistramite.services.FornecedorService;
 
 @RestController
-@RequestMapping(value="/pessoa")
-public class PessoaResource {
+@RequestMapping(value="/fornecedor")
+public class FornecedorResource {
 	
 	@Autowired
-	private PessoaService service;
+	private FornecedorService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Pessoa> find(@PathVariable Integer id) {
+	public ResponseEntity<Fornecedor> find(@PathVariable Integer id) {
 		
-		Pessoa obj = service.find(id);
+		Fornecedor obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 		
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody PessoaNewDTO objDto){
-		Pessoa obj = service.fromDTO(objDto);
+	public ResponseEntity<Void> insert(@Valid @RequestBody FornecedorNewDTO objDto){
+		Fornecedor obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody PessoaDTO objDto, @PathVariable Integer id){
-		Pessoa obj = service.fromDTO(objDto);
+	public ResponseEntity<Void> update(@Valid @RequestBody FornecedorDTO objDto, @PathVariable Integer id){
+		Fornecedor obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
@@ -60,20 +60,20 @@ public class PessoaResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<PessoaDTO>> findAll() {
-		List<Pessoa> list = service.findAll();
-		List<PessoaDTO> listDto = list.stream().map(obj -> new PessoaDTO(obj)).collect(Collectors.toList());
+	public ResponseEntity<List<FornecedorDTO>> findAll() {
+		List<Fornecedor> list = service.findAll();
+		List<FornecedorDTO> listDto = list.stream().map(obj -> new FornecedorDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
 	
 	@RequestMapping(value="/page", method=RequestMethod.GET)
-	public ResponseEntity<Page<PessoaDTO>> findPage(
+	public ResponseEntity<Page<FornecedorDTO>> findPage(
 			@RequestParam(value="page", defaultValue="0") Integer page, 
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
 			@RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
 			@RequestParam(value="direction", defaultValue="ASC")String direction) {
-		Page<Pessoa> list = service.findPage(page, linesPerPage, orderBy, direction);
-		Page<PessoaDTO> listDto = list.map(obj -> new PessoaDTO(obj));
+		Page<Fornecedor> list = service.findPage(page, linesPerPage, orderBy, direction);
+		Page<FornecedorDTO> listDto = list.map(obj -> new FornecedorDTO(obj));
 		return ResponseEntity.ok().body(listDto);
 	}
 }

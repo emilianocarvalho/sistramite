@@ -7,15 +7,19 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.proconpb.sistramite.services.validation.PessoaInsert;
+import com.proconpb.sistramite.services.validation.FornecedorInsert;
 
-@PessoaInsert
-public class PessoaNewDTO implements Serializable {
+@FornecedorInsert
+public class FornecedorNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@NotEmpty(message="Preenchimento obrigatório")
 	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
-	private String nome;
+	private String razaoSocial;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
+	private String nomeFantasia;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
 	@Email(message="Email inválido")
@@ -40,16 +44,27 @@ public class PessoaNewDTO implements Serializable {
 	
 	private Integer cidadeId;
 	
-	public PessoaNewDTO() {
+	public FornecedorNewDTO() {
 		
 	}
 
-	public String getNome() {
-		return nome;
+	
+	public String getRazaoSocial() {
+		return razaoSocial;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
+	}
+
+
+	public String getNomeFantasia() {
+		return nomeFantasia;
+	}
+
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
 	}
 
 	public String getEmail() {

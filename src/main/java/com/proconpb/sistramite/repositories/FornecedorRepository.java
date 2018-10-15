@@ -4,11 +4,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.proconpb.sistramite.domain.Pessoa;
+import com.proconpb.sistramite.domain.Fornecedor;
 
 @Repository
-public interface PessoaRepository extends JpaRepository<Pessoa, Integer>{
+public interface FornecedorRepository extends JpaRepository<Fornecedor, Integer>{
 	
 	@Transactional(readOnly=true)
-	Pessoa findByEmail(String email);
+	Fornecedor findByEmail(String email);
 }
+

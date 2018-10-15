@@ -11,25 +11,25 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
-import com.proconpb.sistramite.domain.Pessoa;
-import com.proconpb.sistramite.dto.PessoaDTO;
-import com.proconpb.sistramite.repositories.PessoaRepository;
+import com.proconpb.sistramite.domain.Fornecedor;
+import com.proconpb.sistramite.dto.FornecedorDTO;
+import com.proconpb.sistramite.repositories.FornecedorRepository;
 import com.proconpb.sistramite.resources.exception.FieldMessage;
 
-public class PessoaUpdateValidator implements ConstraintValidator<PessoaUpdate, PessoaDTO> {
+public class FornecedorUpdateValidator implements ConstraintValidator<FornecedorUpdate, FornecedorDTO> {
 	
 	@Autowired
 	private HttpServletRequest request;
 	
 	@Autowired
-	private PessoaRepository repo;
+	private FornecedorRepository repo;
 	
 	@Override
-	public void initialize(PessoaUpdate ann) {
+	public void initialize(FornecedorUpdate ann) {
 	}
 	
 	@Override
-	public boolean isValid(PessoaDTO objDto, ConstraintValidatorContext context) {
+	public boolean isValid(FornecedorDTO objDto, ConstraintValidatorContext context) {
 	
 		@SuppressWarnings("unchecked")
 		Map<String, String> map = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
@@ -37,7 +37,7 @@ public class PessoaUpdateValidator implements ConstraintValidator<PessoaUpdate, 
 		
 		List<FieldMessage> list = new ArrayList<>();
 		
-		Pessoa aux = repo.findByEmail(objDto.getEmail());
+		Fornecedor aux = repo.findByEmail(objDto.getEmail());
 		if (aux != null && !aux.getId().equals(uriId)) {
 			list.add(new FieldMessage("email", "Email já existente"));
 		}

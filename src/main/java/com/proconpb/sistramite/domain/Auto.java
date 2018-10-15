@@ -28,7 +28,7 @@ public class Auto implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="empresa_id")
-	private Pessoa empresa;
+	private Fornecedor empresa;
 	
 	private String tipoDeInfracao;
 	private String tipoDeReclamacao;
@@ -38,7 +38,7 @@ public class Auto implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="fiscal_id")
-	private Pessoa fiscal;
+	private Servidor fiscal;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="auto", cascade=CascadeType.ALL)
@@ -48,8 +48,8 @@ public class Auto implements Serializable{
 		
 	}
 
-	public Auto(Integer id, Integer numero, Pessoa empresa, String tipoDeInfracao, String tipoDeReclamacao,
-			Date dataLavratura, Pessoa fiscal) {
+	public Auto(Integer id, Integer numero, Fornecedor empresa, String tipoDeInfracao, String tipoDeReclamacao,
+			Date dataLavratura, Servidor fiscal) {
 		super();
 		this.id = id;
 		this.numero = numero;
@@ -76,11 +76,11 @@ public class Auto implements Serializable{
 		this.numero = numero;
 	}
 
-	public Pessoa getEmpresa() {
+	public Fornecedor getEmpresa() {
 		return empresa;
 	}
 
-	public void setEmpresa(Pessoa empresa) {
+	public void setEmpresa(Fornecedor empresa) {
 		this.empresa = empresa;
 	}
 
@@ -108,11 +108,11 @@ public class Auto implements Serializable{
 		this.dataLavratura = dataLavratura;
 	}
 
-	public Pessoa getFiscal() {
+	public Servidor getFiscal() {
 		return fiscal;
 	}
 
-	public void setFiscal(Pessoa fiscal) {
+	public void setFiscal(Servidor fiscal) {
 		this.fiscal = fiscal;
 	}
 

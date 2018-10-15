@@ -19,15 +19,14 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private Environment env;
 
-	private static final String[] PUBLIC_MATCHERS = { "/h2-console/*", "/autos/*", "/pessoa/*", "/setor/*" };
+	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**", "/autos/**", "/pessoa/**", "/setor/**" };
 
-	private static final String[] PUBLIC_MATCHERS_GET = { "/autos/*", "/pessoa/*", "/setor/*" };
+	private static final String[] PUBLIC_MATCHERS_GET = { "/autos/**", "/pessoa/**", "/setor/**" };
 
 	private static final String[] PUBLIC_MATCHERS_POST = { "/autos/*", "/pessoa/*", "/setor/*" };
 
@@ -55,4 +54,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return source;
 
 	}
+
 }

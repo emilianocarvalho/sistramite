@@ -8,10 +8,10 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = PessoaUpdateValidator.class)
+@Constraint(validatedBy = FornecedorInsertValidator.class)
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PessoaUpdate {
+public @interface FornecedorInsert {
 	String message() default "Erro de validação";
 
 	Class<?>[] groups() default {};

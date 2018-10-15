@@ -9,23 +9,19 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @Entity
 @JsonTypeName("pessoaJuridica")
-public class PessoaJuridica extends Pessoa {
+public class PessoaJuridica extends Fornecedor {
 	private static final long serialVersionUID = 1L;
 
 	@NotEmpty(message="Preenchimento obrigatório")
 	@CNPJ
 	private String cnpj;
 	
-	@NotEmpty(message="Preenchimento obrigatório")
-	private String razaoSocial;
-	
 	public PessoaJuridica() {
 	}
 	
-	public PessoaJuridica(Integer id, String nome, String email, String cnpj, String razaoSocial) {
-		super(id, nome, email);
+	public PessoaJuridica(Integer id, String razaoSocial, String nomeFantasia, String email, String cnpj) {
+		super(id, razaoSocial, nomeFantasia, email);
 		this.cnpj = cnpj;
-		this.razaoSocial = razaoSocial;
 	}
 	
 	public String getCnpj() {
@@ -34,10 +30,5 @@ public class PessoaJuridica extends Pessoa {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-	public String getRazaoSocial() {
-		return razaoSocial;
-	}
-	public void setRazaoSocial(String razaoSocial) {
-		this.razaoSocial = razaoSocial;
-	}	
+
 }

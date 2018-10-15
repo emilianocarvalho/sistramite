@@ -8,25 +8,25 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.proconpb.sistramite.domain.Pessoa;
-import com.proconpb.sistramite.dto.PessoaNewDTO;
-import com.proconpb.sistramite.repositories.PessoaRepository;
+import com.proconpb.sistramite.domain.Fornecedor;
+import com.proconpb.sistramite.dto.FornecedorNewDTO;
+import com.proconpb.sistramite.repositories.FornecedorRepository;
 import com.proconpb.sistramite.resources.exception.FieldMessage;
 
-public class PessoaInsertValidator implements ConstraintValidator<PessoaInsert, PessoaNewDTO> {
+public class FornecedorInsertValidator implements ConstraintValidator<FornecedorInsert, FornecedorNewDTO> {
 	
 	@Autowired
-	private PessoaRepository repo;
+	private FornecedorRepository repo;
 	
 	@Override
-	public void initialize(PessoaInsert ann) {
+	public void initialize(FornecedorInsert ann) {
 	}
 	
-	public boolean isValid(PessoaNewDTO objDto, ConstraintValidatorContext context) {
+	public boolean isValid(FornecedorNewDTO objDto, ConstraintValidatorContext context) {
 		
 		List<FieldMessage> list = new ArrayList<>();
 		
-		Pessoa aux = repo.findByEmail(objDto.getEmail());
+		Fornecedor aux = repo.findByEmail(objDto.getEmail());
 		if(aux != null) {
 			list.add(new FieldMessage("email", "Email já existente"));
 		}
