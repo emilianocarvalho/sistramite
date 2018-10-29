@@ -13,6 +13,6 @@ public interface FornecedorRepository extends JpaRepository<Fornecedor, Integer>
 	Fornecedor findByEmail(String email);
 	
 	@Transactional(readOnly=true)
-	Fornecedor findByNome(String nomeFantasia);
+	Fornecedor findByNomeFantasia(String nomeFantasia);
 }
 

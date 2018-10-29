@@ -64,13 +64,13 @@ public class FornecedorService {
 		return repo.findAll();
 	}
 	
-	public Fornecedor findByNome(String nomeFantasia) {
+	public Fornecedor findByNomeFantasia(String nomeFantasia) {
 		
 		//UserSS user = UserService.autenticated();
 		//if(user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
 		//	throw new AuthorizationException("Acesso negado");
 		//}
-		Fornecedor obj = repo.findByNome(nomeFantasia);
+		Fornecedor obj = repo.findByNomeFantasia(nomeFantasia);
 		if (obj == null) {
 			throw new ObjectNotFoundException("Objeto não econtrado! Id: , Tipo: " + Fornecedor.class.getName());
 		}

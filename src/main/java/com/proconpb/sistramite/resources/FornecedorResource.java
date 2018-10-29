@@ -37,7 +37,7 @@ public class FornecedorResource {
 	
 	@RequestMapping(value="/{nomeFantasia}", method=RequestMethod.GET)
 	public ResponseEntity<Fornecedor> find(@PathVariable String nomeFantasia) {
-		Fornecedor obj = service.findByNome(nomeFantasia);
+		Fornecedor obj = service.findByNomeFantasia(nomeFantasia);
 		return ResponseEntity.ok().body(obj);	
 	}
 	
