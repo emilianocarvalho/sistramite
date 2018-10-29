@@ -37,8 +37,8 @@ public class AutoService {
 	@Transactional
 	public Auto insert(Auto obj) {
 		obj.setId(null);		
-		if (obj.getEmpresa() instanceof Fornecedor){
-			Fornecedor empresa = (Fornecedor) obj.getEmpresa();
+		if (obj.getAutuado() instanceof Fornecedor){
+			Fornecedor empresa = (Fornecedor) obj.getAutuado();
 			fornecedorRepo.save(empresa);
 		}		
 		if (obj.getFiscal() instanceof Servidor){

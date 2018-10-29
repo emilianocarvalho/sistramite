@@ -31,10 +31,14 @@ public class FornecedorResource {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Fornecedor> find(@PathVariable Integer id) {
-		
 		Fornecedor obj = service.find(id);
-		return ResponseEntity.ok().body(obj);
-		
+		return ResponseEntity.ok().body(obj);	
+	}
+	
+	@RequestMapping(value="/{nomeFantasia}", method=RequestMethod.GET)
+	public ResponseEntity<Fornecedor> find(@PathVariable String nomeFantasia) {
+		Fornecedor obj = service.findByNome(nomeFantasia);
+		return ResponseEntity.ok().body(obj);	
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)

@@ -64,6 +64,19 @@ public class FornecedorService {
 		return repo.findAll();
 	}
 	
+	public Fornecedor findByNome(String nomeFantasia) {
+		
+		//UserSS user = UserService.autenticated();
+		//if(user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+		//	throw new AuthorizationException("Acesso negado");
+		//}
+		Fornecedor obj = repo.findByNome(nomeFantasia);
+		if (obj == null) {
+			throw new ObjectNotFoundException("Objeto não econtrado! Id: , Tipo: " + Fornecedor.class.getName());
+		}
+		return obj;
+	}
+	
 	public Page<Fornecedor> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);

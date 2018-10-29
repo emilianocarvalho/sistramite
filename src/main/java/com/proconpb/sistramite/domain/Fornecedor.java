@@ -51,10 +51,7 @@ public class Fornecedor implements Serializable{
 	@JsonIgnore
 	@OneToMany
 	private List<Auto> autos = new ArrayList<>();
-	
-	@JsonIgnore
-	@OneToMany
-	private List<Tramite> tramites = new ArrayList<>();
+
 
 	public Fornecedor() {
 	}
@@ -106,6 +103,7 @@ public class Fornecedor implements Serializable{
 		this.enderecos = enderecos;
 	}
 
+	@JsonIgnore
 	public Set<String> getTelefones() {
 		return telefones;
 	}
@@ -120,14 +118,6 @@ public class Fornecedor implements Serializable{
 
 	public void setAutos(List<Auto> autos) {
 		this.autos = autos;
-	}
-
-	public List<Tramite> getTramites() {
-		return tramites;
-	}
-
-	public void setTramites(List<Tramite> tramites) {
-		this.tramites = tramites;
 	}
 	
 

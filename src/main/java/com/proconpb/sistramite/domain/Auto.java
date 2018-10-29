@@ -27,8 +27,8 @@ public class Auto implements Serializable{
 	private Integer numero;
 	
 	@ManyToOne
-	@JoinColumn(name="empresa_id")
-	private Fornecedor empresa;
+	@JoinColumn(name="autuado_id")
+	private Fornecedor autuado;
 	
 	private String tipoDeInfracao;
 	private String tipoDeReclamacao;
@@ -48,12 +48,12 @@ public class Auto implements Serializable{
 		
 	}
 
-	public Auto(Integer id, Integer numero, Fornecedor empresa, String tipoDeInfracao, String tipoDeReclamacao,
+	public Auto(Integer id, Integer numero, Fornecedor autuado, String tipoDeInfracao, String tipoDeReclamacao,
 			Date dataLavratura, Servidor fiscal) {
 		super();
 		this.id = id;
 		this.numero = numero;
-		this.empresa = empresa;
+		this.autuado = autuado;
 		this.tipoDeInfracao = tipoDeInfracao;
 		this.tipoDeReclamacao = tipoDeReclamacao;
 		this.dataLavratura = dataLavratura;
@@ -76,12 +76,12 @@ public class Auto implements Serializable{
 		this.numero = numero;
 	}
 
-	public Fornecedor getEmpresa() {
-		return empresa;
+	public Fornecedor getAutuado() {
+		return autuado;
 	}
 
-	public void setEmpresa(Fornecedor empresa) {
-		this.empresa = empresa;
+	public void setAutuado(Fornecedor autuado) {
+		this.autuado = autuado;
 	}
 
 	public String getTipoDeInfracao() {
@@ -116,6 +116,7 @@ public class Auto implements Serializable{
 		this.fiscal = fiscal;
 	}
 
+	@JsonIgnore
 	public List<Tramite> getTramites() {
 		return tramites;
 	}

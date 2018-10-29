@@ -23,8 +23,12 @@ public class Setor implements Serializable {
 	private String nome;
 	
 	@JsonIgnore
+	@OneToMany(mappedBy="setorOrigem")
+	private List<Tramite> tramitesOrigem = new ArrayList<>();
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="setorDestino")
-	private List<Tramite> tramites = new ArrayList<>();
+	private List<Tramite> tramitesDestino = new ArrayList<>();
 	
 	public Setor() {
 		
@@ -53,14 +57,22 @@ public class Setor implements Serializable {
 		this.nome = nome;
 	}
 
-
 	@JsonIgnore
-	public List<Tramite> getTramites() {
-		return tramites;
+	public List<Tramite> getTramitesOrigem() {
+		return tramitesOrigem;
 	}
 
-	public void setTramites(List<Tramite> tramites) {
-		this.tramites = tramites;
+	public void setTramitesOrigem(List<Tramite> tramitesOrigem) {
+		this.tramitesOrigem = tramitesOrigem;
+	}
+
+	@JsonIgnore
+	public List<Tramite> getTramitesDestino() {
+		return tramitesDestino;
+	}
+
+	public void setTramitesDestino(List<Tramite> tramitesDestino) {
+		this.tramitesDestino = tramitesDestino;
 	}
 
 	@Override

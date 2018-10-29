@@ -24,7 +24,11 @@ public class Tramite implements Serializable {
     private Date dataMovimentacao;
 	
 	@ManyToOne
-	@JoinColumn(name="setor_id")
+	@JoinColumn(name="setorOrigem_id")
+	private Setor setorOrigem;
+	
+	@ManyToOne
+	@JoinColumn(name="setorDestino_id")
 	private Setor setorDestino;
 	
 	@ManyToOne
@@ -39,11 +43,12 @@ public class Tramite implements Serializable {
 	public Tramite() {
 	}
 	
-	public Tramite(Integer id, Date dataMovimentacao, Setor setor, Auto auto, Usuario usuario) {
+	public Tramite(Integer id, Date dataMovimentacao, Setor setorOrigem, Setor setorDestino, Auto auto, Usuario usuario) {
 		super();
 		this.id = id;
 		this.dataMovimentacao = dataMovimentacao;
-		this.setorDestino = setor;
+		this.setorOrigem = setorOrigem;
+		this.setorDestino = setorDestino;
 		this.auto = auto;
 		this.usuario = usuario;
 	}
@@ -60,6 +65,15 @@ public class Tramite implements Serializable {
 	public void setDataMovimentacao(Date dataMovimentacao) {
 		this.dataMovimentacao = dataMovimentacao;
 	}
+	
+	public Setor getSetorOrigem() {
+		return setorOrigem;
+	}
+
+	public void setSetorOrigem(Setor setorOrigem) {
+		this.setorOrigem = setorOrigem;
+	}
+
 	public Setor getSetorDestino() {
 		return setorDestino;
 	}

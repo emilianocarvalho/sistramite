@@ -105,18 +105,21 @@ public class DBService {
 		Usuario usu2 = new Usuario(null, "darcio@procon.pb.gov.br", "123");
 
 		
-		Tramite t1 = new Tramite(null, sdf.parse("10/09/2018 08:10"), s1, auto1, usu1);
-		Tramite t2 = new Tramite(null, sdf.parse("10/09/2018 08:20"), s1, auto2, usu1);
+		Tramite t1 = new Tramite(null, sdf.parse("10/09/2018 08:10"), s3, s1, auto1, usu1);
+		Tramite t2 = new Tramite(null, sdf.parse("10/09/2018 08:20"), s3, s1, auto2, usu1);
+		Tramite t3 = new Tramite(null, sdf.parse("12/09/2018 08:30"), s1, s4, auto2, usu2);
 		
-		s1.getTramites().addAll(Arrays.asList(t1));
-		s1.getTramites().addAll(Arrays.asList(t2));
+		//s1.getTramites().addAll(Arrays.asList(t1));
+		//s1.getTramites().addAll(Arrays.asList(t2));
+		//s4.getTramites().addAll(Arrays.asList(t3));
 		
 		auto1.getTramites().addAll(Arrays.asList(t1));
 		auto2.getTramites().addAll(Arrays.asList(t2));
+		auto2.getTramites().addAll(Arrays.asList(t3));
 		
 		usuarioRepository.saveAll(Arrays.asList(usu1, usu2));
 		setorRepository.saveAll(Arrays.asList(s1, s2, s3, s4, s5, s6, s7));
 		autoRepository.saveAll(Arrays.asList(auto1, auto2));
-		tramiteRepository.saveAll(Arrays.asList(t1, t2));
+		tramiteRepository.saveAll(Arrays.asList(t1, t2, t3));
 	}
 }
