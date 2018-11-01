@@ -18,6 +18,7 @@ import com.proconpb.sistramite.domain.Servidor;
 import com.proconpb.sistramite.domain.Setor;
 import com.proconpb.sistramite.domain.Tramite;
 import com.proconpb.sistramite.domain.Usuario;
+import com.proconpb.sistramite.domain.enums.Perfil;
 import com.proconpb.sistramite.repositories.AutoRepository;
 import com.proconpb.sistramite.repositories.CidadeRepository;
 import com.proconpb.sistramite.repositories.EnderecoRepository;
@@ -104,7 +105,9 @@ public class DBService {
 		fsc2.getAutos().addAll(Arrays.asList(auto2));
 		
 		Usuario usu1 = new Usuario(null, "maria@procon.pb.gov.br", pe.encode("123456"));
+		usu1.addPerfil(Perfil.OPERADOR);
 		Usuario usu2 = new Usuario(null, "darcio@procon.pb.gov.br", pe.encode("123"));
+		usu2.addPerfil(Perfil.ADMIN);
 
 		
 		Tramite t1 = new Tramite(null, sdf.parse("10/09/2018 08:10"), s3, s1, auto1, usu1);
