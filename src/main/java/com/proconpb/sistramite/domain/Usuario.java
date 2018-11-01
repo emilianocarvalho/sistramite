@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Usuario implements Serializable{
@@ -16,6 +19,9 @@ public class Usuario implements Serializable{
 	private Integer id;
 	
 	private String login;
+	
+	@JsonIgnore
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String senha;
 	
 	public Usuario() {

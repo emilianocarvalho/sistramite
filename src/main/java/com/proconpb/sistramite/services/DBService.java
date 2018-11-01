@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.proconpb.sistramite.domain.Auto;
@@ -30,7 +31,8 @@ import com.proconpb.sistramite.repositories.UsuarioRepository;
 @Service
 public class DBService {
 
-	
+	@Autowired
+	private BCryptPasswordEncoder pe;
 	@Autowired
 	private SetorRepository setorRepository;
 	@Autowired
@@ -101,8 +103,8 @@ public class DBService {
 		fsc1.getAutos().addAll(Arrays.asList(auto1));
 		fsc2.getAutos().addAll(Arrays.asList(auto2));
 		
-		Usuario usu1 = new Usuario(null, "maria@procon.pb.gov.br", "123456");
-		Usuario usu2 = new Usuario(null, "darcio@procon.pb.gov.br", "123");
+		Usuario usu1 = new Usuario(null, "maria@procon.pb.gov.br", pe.encode("123456"));
+		Usuario usu2 = new Usuario(null, "darcio@procon.pb.gov.br", pe.encode("123"));
 
 		
 		Tramite t1 = new Tramite(null, sdf.parse("10/09/2018 08:10"), s3, s1, auto1, usu1);
