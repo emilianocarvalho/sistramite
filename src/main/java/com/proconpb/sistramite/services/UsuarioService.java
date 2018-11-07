@@ -28,6 +28,19 @@ public class UsuarioService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Usuario não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
 	}
 	
+	public Usuario findByLogin(String login) {
+		
+		//UserSS user = UserService.autenticated();
+		//if(user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+		//	throw new AuthorizationException("Acesso negado");
+		//}
+		Usuario obj = repo.findByLogin(login);
+		if (obj == null) {
+			throw new ObjectNotFoundException("Objeto não econtrado! Id: , Tipo: ");
+		}
+		return obj;
+	}
+	
 	@Transactional
 	public Usuario insert(Usuario obj) {
 		obj.setId(null);

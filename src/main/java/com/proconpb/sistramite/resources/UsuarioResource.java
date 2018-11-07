@@ -30,6 +30,12 @@ public class UsuarioResource {
 		return ResponseEntity.ok().body(obj);	
 	}
 	
+	@RequestMapping(value="/{login}", method=RequestMethod.GET)
+	public ResponseEntity<Usuario> find(@PathVariable String login) {
+		Usuario obj = service.findByLogin(login);
+		return ResponseEntity.ok().body(obj);	
+	}
+	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Usuario obj){
 		obj = service.insert(obj);
