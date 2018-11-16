@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.proconpb.sistramite.domain.Usuario;
+import com.proconpb.sistramite.domain.enums.Perfil;
 import com.proconpb.sistramite.repositories.UsuarioRepository;
+import com.proconpb.sistramite.security.UserSS;
+import com.proconpb.sistramite.services.exceptions.AuthorizationException;
 import com.proconpb.sistramite.services.exceptions.DataIntegrityException;
 import com.proconpb.sistramite.services.exceptions.ObjectNotFoundException;
 
@@ -28,15 +31,17 @@ public class UsuarioService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Usuario não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
 	}
 	
-	public Usuario findByLogin(String login) {
+	public Usuario findByLogin(String email) {
 		
-		//UserSS user = UserService.autenticated();
-		//if(user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
-		//	throw new AuthorizationException("Acesso negado");
-		//}
-		Usuario obj = repo.findByLogin(login);
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+
+		Usuario obj = repo.findByLogin(email);
 		if (obj == null) {
-			throw new ObjectNotFoundException("Objeto não econtrado! Id: , Tipo: ");
+			throw new ObjectNotFoundException(
+					"Objeto não encontrado! Id: " + user.getId() + ", Tipo: " + Usuario.class.getName());
 		}
 		return obj;
 	}
