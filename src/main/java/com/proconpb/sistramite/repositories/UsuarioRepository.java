@@ -12,4 +12,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 	@Transactional(readOnly=true)
 	Usuario findByLogin(String login);
 	
+//	@Transactional(readOnly=true)
+//	Optional<Usuario> findById(Integer id);
+	
 }

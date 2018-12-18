@@ -27,17 +27,20 @@ public class UsuarioService {
 	
 	
 	public Usuario find(Integer id) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		Optional<Usuario> obj = repo.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Usuario não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
+		
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + user.getId() + ", Tipo: " + Usuario.class.getName()));
 	}
 	
-	public Usuario findByLogin(String email) {
-		
+	public Usuario findByLogin(String email) {		
 		UserSS user = UserService.authenticated();
 		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
 			throw new AuthorizationException("Acesso negado");
 		}
-
 		Usuario obj = repo.findByLogin(email);
 		if (obj == null) {
 			throw new ObjectNotFoundException(

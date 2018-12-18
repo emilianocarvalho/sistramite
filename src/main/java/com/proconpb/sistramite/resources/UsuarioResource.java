@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,18 +25,19 @@ public class UsuarioResource {
 	@Autowired
 	private UsuarioService service;
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Usuario> find(@PathVariable Integer id) {		
-		Usuario obj = service.find(id);
-		return ResponseEntity.ok().body(obj);	
-	}
+//	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+//	public ResponseEntity<Usuario> findId(@PathVariable Integer id) {
+//		Usuario obj = service.find(id);
+//		return ResponseEntity.ok().body(obj);	
+//	}
 	
 	@RequestMapping(value="/{login}", method=RequestMethod.GET)
-	public ResponseEntity<Usuario> find(@PathVariable String login) {
+	public ResponseEntity<Usuario> findLogin(@PathVariable String login) {
 		Usuario obj = service.findByLogin(login);
 		return ResponseEntity.ok().body(obj);	
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Usuario obj){
 		obj = service.insert(obj);
@@ -43,6 +45,7 @@ public class UsuarioResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<Usuario>> findAll() {
 		List<Usuario> list = service.findAll();
